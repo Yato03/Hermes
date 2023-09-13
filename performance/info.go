@@ -21,8 +21,39 @@ func CpuInfo() string {
 	return result
 }
 
-func MemInfo() {
+func MemInfo() string {
+	var result = ""
+
 	memInfo, _ := mem.VirtualMemory()
-	fmt.Printf("\nTotal de memoria: %v GB\n", memInfo.Total/1024/1024/1024)
-	fmt.Printf("Memoria libre: %v GB\n", memInfo.Free/1024/1024/1024)
+
+	memTotal := memInfo.Total / 1024 / 1024 / 1024
+
+	memUsed := memInfo.Used / 1024 / 1024 / 1024
+	memUsedPercent := memInfo.UsedPercent
+
+	memFree := memInfo.Available / 1024 / 1024 / 1024
+	memFreePercent := float64(memFree) / float64(memTotal) * 100
+
+	result += fmt.Sprintf("Used memory: %vGB/%vGB (%.2f%%) \n", memUsed, memTotal, memUsedPercent)
+	result += fmt.Sprintf("Free memory: %vGB/%vGB (%.2f%%) \n", memFree, memTotal, memFreePercent)
+
+	return result
+}
+
+func DiskInfo() string {
+	var result = ""
+
+	return result
+}
+
+func NetInfo() string {
+	var result = ""
+
+	return result
+}
+
+func SysInfo() string {
+	var result = ""
+
+	return result
 }

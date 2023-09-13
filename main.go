@@ -32,7 +32,7 @@ var memCmd = &cobra.Command{
 	Short: "Get memory information",
 	Long:  "Get information about memory usage of your system",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("MEM comand called")
+		fmt.Println(performance.MemInfo())
 	},
 }
 
@@ -41,7 +41,7 @@ var diskCmd = &cobra.Command{
 	Short: "Get disk information",
 	Long:  "Get information about disk usage of your system",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Disk comand called")
+		fmt.Println(performance.DiskInfo())
 	},
 }
 
@@ -50,7 +50,7 @@ var netCmd = &cobra.Command{
 	Short: "Get network information",
 	Long:  "Get information about network usage of your system",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Network comand called")
+		fmt.Println(performance.NetInfo())
 	},
 }
 
@@ -59,7 +59,7 @@ var sysCmd = &cobra.Command{
 	Short: "Get system information",
 	Long:  "Get general information about your system such as OS version and architecture",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("System comand called")
+		fmt.Println(performance.SysInfo())
 	},
 }
 
