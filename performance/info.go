@@ -5,6 +5,8 @@ import (
 
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/mem"
+
+	"Hermes/utils"
 )
 
 func CpuInfo() string {
@@ -18,6 +20,18 @@ func CpuInfo() string {
 	for _, info := range cpuInfo {
 		result += fmt.Sprintf("  %s: %d\n", info.ModelName, info.Cores)
 	}
+
+	result += "\n"
+
+	cpuUsage, err := utils.CpuUsage()
+	cpuUsageString := fmt.Sprintf("%.2f", cpuUsage)
+
+	if err != nil {
+		result += fmt.Sprintf("It couldn't be possible to obtain usage information")
+	} else {
+		result += fmt.Sprintf("CPU Usage: %s", cpuUsageString)
+	}
+
 	return result
 }
 
@@ -31,11 +45,15 @@ func MemInfo() string {
 	memUsed := memInfo.Used / 1024 / 1024 / 1024
 	memUsedPercent := memInfo.UsedPercent
 
-	memFree := memInfo.Available / 1024 / 1024 / 1024
+	memFree := memInfo.Free / 1024 / 1024 / 1024
 	memFreePercent := float64(memFree) / float64(memTotal) * 100
+
+	memAvaiable := memInfo.Free / 1024 / 1024 / 1024
+	memAvaiablePercent := float64(memAvaiable) / float64(memTotal) * 100
 
 	result += fmt.Sprintf("Used memory: %vGB/%vGB (%.2f%%) \n", memUsed, memTotal, memUsedPercent)
 	result += fmt.Sprintf("Free memory: %vGB/%vGB (%.2f%%) \n", memFree, memTotal, memFreePercent)
+	result += fmt.Sprintf("Free memory: %vGB/%vGB (%.2f%%) \n", memAvaiable, memTotal, memAvaiablePercent)
 
 	return result
 }
