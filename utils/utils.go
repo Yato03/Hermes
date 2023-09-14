@@ -11,7 +11,7 @@ func CpuUsage() (float64, error) {
 	cmd := exec.Command("ps", "aux")
 	output, err := cmd.Output()
 	if err != nil {
-		return 0, errors.New("Error al ejectuar el comando ps aux:")
+		return 0, errors.New("Error executing ps aux")
 	}
 
 	lines := strings.Split(string(output), "\n")
