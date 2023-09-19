@@ -3,14 +3,22 @@ package utils
 import (
 	"math"
 	"strconv"
+	"unicode"
 )
 
 func ParseUint64(s string) uint64 {
+
+	//first character is not a digit or sign
+	firstChar := rune(s[0])
+	if !unicode.IsDigit(firstChar) && !(firstChar == '+' || firstChar == '-') {
+		return 0
+	}
+
 	n, err := strconv.ParseInt(s, 10, 64)
 	if err != nil {
-		return uint64(n)
-	} else {
 		return 0
+	} else {
+		return uint64(n)
 	}
 
 }
