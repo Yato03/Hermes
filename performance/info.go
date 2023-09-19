@@ -58,10 +58,22 @@ func MemInfo() string {
 	return result
 }
 
-func DiskInfo() string {
+func DiskInfo() (string, error) {
 	var result = ""
 
-	return result
+	partitions, err := utils.DiskUsage()
+	if err != nil {
+		return "", err
+	}
+
+	for _, partition := range partitions {
+		result += "\n"
+		result += fmt.Sprintf("Device: %s\n", partition.Device)
+		result += fmt.Sprintf("Total space: %.2f GB\n", partition.Total)
+		result += fmt.Sprintf("\tUsed space: %.2f GB\n", partition.Used)
+		result += fmt.Sprintf("\tAvaiable space: %.2f GB\n", partition.Available)
+	}
+	return result, nil
 }
 
 func NetInfo() string {

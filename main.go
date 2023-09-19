@@ -41,7 +41,12 @@ var diskCmd = &cobra.Command{
 	Short: "Get disk information",
 	Long:  "Get information about disk usage of your system",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(performance.DiskInfo())
+		diskinfo, err := performance.DiskInfo()
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println(diskinfo)
+		}
 	},
 }
 
