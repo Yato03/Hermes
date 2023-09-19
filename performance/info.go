@@ -69,9 +69,9 @@ func DiskInfo() (string, error) {
 	for _, partition := range partitions {
 		result += "\n"
 		result += fmt.Sprintf("Device: %s\n", partition.Device)
-		result += fmt.Sprintf("Total space: %.2f GB\n", partition.Total)
-		result += fmt.Sprintf("\tUsed space: %.2f GB\n", partition.Used)
-		result += fmt.Sprintf("\tAvaiable space: %.2f GB\n", partition.Available)
+		result += fmt.Sprintf("Total space: %s\n", partition.Total)
+		result += fmt.Sprintf("\tUsed space: %s\n", partition.Used)
+		result += fmt.Sprintf("\tAvaiable space: %s\n", partition.Available)
 	}
 	return result, nil
 }
